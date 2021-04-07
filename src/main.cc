@@ -11,9 +11,12 @@ using namespace llvm;
 using namespace clang;
 using namespace clang::tooling;
 
+static llvm::cl::OptionCategory ctCategory("clang-tool options");
 int main(int argc, const char **argv)
 {
-    llvm::cl::OptionCategory ctCategory("clang-tool options");
+    // In Clang 13, the line below will produce a compile-time error because the CommonOptionParser 
+    // constructor is protected; the easiest way to deal with this is to modify it to public 
+    // in the included clang/Tooling/CommonOptionsParser.h
     CommonOptionsParser optionsParser(argc, argv, ctCategory);
 
     for(auto &sourceFile : optionsParser.getSourcePathList())
