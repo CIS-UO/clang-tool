@@ -28,12 +28,13 @@ bool customRunToolOnCodeWithArgs(std::unique_ptr<clang::FrontendAction> frontend
     auto pchContainer = std::make_shared<clang::PCHContainerOperations>();
     clang::tooling::ToolInvocation invocation(getSyntaxOnlyToolArgs(args, fileNameRef), std::move(frontendAction), files.get(), pchContainer);
 
-    //llvm::SmallString<1024> codeStorage;
-    //invocation.mapVirtualFile(fileNameRef, code.toNullTerminatedStringRef(codeStorage));
+    llvm::SmallString<1024> codeStorage;
+    /*
+    invocation.mapVirtualFile(fileNameRef, code.toNullTerminatedStringRef(codeStorage));
 
-    //for (auto &filenameWithContent : virtualMappedFiles)
-    //    invocation.mapVirtualFile(filenameWithContent.first, filenameWithContent.second);
-
+    for (auto &filenameWithContent : virtualMappedFiles)
+        invocation.mapVirtualFile(filenameWithContent.first, filenameWithContent.second);
+    */
     return invocation.run();
 }
 
